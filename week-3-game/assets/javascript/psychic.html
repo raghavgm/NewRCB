@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guess the Letter!</title>
+</head>
+<body>
+
+<div id="game">
+	<p>Press any key to start playing</p>
+</div>
+<script type="text/javascript">
+
+//setting computer choices
+var computerChoices = ["a","b","c","d","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+//declaring variables
+var wins = 0;
+var losses = 0;
+var guesses = 8;
+
+
+//function that records the keypress and sets it to userGuess.
+document.onkeyup = function(event){
+
+
+//setting user guess to lowercase
+userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+//setting computer guess to random
+computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+
+//for loop going through the number of guesses with conditions if user guesses right or is wrong.
+for(i=0;i<9;i++){
+
+if(userGuess==computerGuess) {
+	alert("You Win")
+	wins++;
+	console.log(wins);
+	i=0;
+} else {
+	guesses--;
+	console.log(guesses);
+	alert("Guesses Left: " + guesses);//If I remove this alert, the losses go up on every press of keypad. How come??
+
+}
+if (guesses==0) {
+	i=0;
+	alert("You Lost!");//If I remove this line, and line 44, the program doesn't run...How come?
+	losses++;
+	console.log(losses);
+	guesses=8;
+
+}
+
+// Taking the tallies and displaying them in HTML
+		var html = "<p>Press any key to start playing</p>" +
+		"<p>wins: " +
+		wins + 
+		"</p>" +
+		"<p>losses: " + 
+		losses + 
+		"</p>" +
+		"<p>guesses: " + 
+		guesses + 
+		"</p>";
+
+		// Placing the html into the game ID
+		document.querySelector('#game').innerHTML = html;
+
+}	
+	
+}
+
+
+
+
+
+
+</script>
+</body>
+</html>
